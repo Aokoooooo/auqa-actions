@@ -24,7 +24,10 @@ yarn add aqua-actions
 
   ```typescript
   const ADD_TYPE = "ADD";
-  const add = payload => {
+  interface IAddAction {
+    type: typeof ADD_TYPE;
+  }
+  const add = <T = any>(payload: T): IAddAction => {
     return { type: ADD_TYPE, payload };
   };
 
@@ -35,7 +38,7 @@ yarn add aqua-actions
 - `auqa actions`
 
   ```typescript
-  const add = createAction("ADD");
+  const add = createAction<T>("ADD");
 
   // add()     --->  { type: "ADD"}
   // add(100)  --->  { type: "ADD", payload: 100}
@@ -46,7 +49,7 @@ yarn add aqua-actions
 - `redux`原始方法
   ```typescript
   const initState = { sum: 0 };
-  const reducer = (state = initState, action) => {
+  const reducer = (state = initState, action: IAddAction) => {
     switch (action.type) {
       case ADD_TYPE:
         return { ...state, sum: state.sum + action.payload };
@@ -59,7 +62,7 @@ yarn add aqua-actions
   ```typescript
   const initState = { sum: 0 };
   const reducer = createReducer(initState)
-    .handleAction(add, (state, action) => {
+    .handleAction(add, (state, action<ReturnType<typeof add>) => {
       return { ...state, sum: state.sum + action.payload };
     })
     .build();
