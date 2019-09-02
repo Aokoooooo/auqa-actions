@@ -28,7 +28,7 @@ yarn add aqua-actions
     type: typeof ADD_TYPE;
     payload: T;
   }
-  const add = <T = any>(payload: T): IAddAction => {
+  const add = <T = any>(payload: T): IAddAction<T> => {
     return { type: ADD_TYPE, payload };
   };
 
@@ -98,16 +98,26 @@ yarn add aqua-actions
 - `ReducerCreator`
   通过链式调用`.handleAction`添加处理分支,末尾调用`.build()`返回完整`reducer`.
 
-  ```typescript
-    handleAction<P = any, M = any>(
-    type: (() => ActionType) | string,
-    handler: ReducerHandeler<T, P, M>
-  ) :this
+  - `handleAction`
 
-    build(): (state = this.initState, action: ActionType)=> T
+    ```typescript
+        handleAction<P = any, M = any>(
+        type: (() => ActionType) | string,
+        handler: ReducerHandeler<T, P, M>
+    ) :this
+    ```
 
-    type ReducerHandeler<T = any, P = any, M = any> = (
-  state: T,
-  action: ActionType<P, M>
-  ) => T;
-  ```
+  - `build`
+
+    ```typescript
+        build(): (state = this.initState, action: ActionType)=> T
+    ```
+
+  - `ReducerHandeler`
+
+    ```typescript
+        type ReducerHandeler<T = any, P = any, M = any> = (
+    state: T,
+    action: ActionType<P, M>
+    ) => T;
+    ```
