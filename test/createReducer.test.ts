@@ -1,4 +1,4 @@
-import { createReducer, createAction } from "../src";
+import { createAction, createReducer } from "../src";
 
 describe("test createReducer", () => {
   const initReducer1 = {
