@@ -24,8 +24,9 @@ yarn add aqua-actions
 
   ```typescript
   const ADD_TYPE = "ADD";
-  interface IAddAction {
+  interface IAddAction<T = any> {
     type: typeof ADD_TYPE;
+    payload: T;
   }
   const add = <T = any>(payload: T): IAddAction => {
     return { type: ADD_TYPE, payload };
