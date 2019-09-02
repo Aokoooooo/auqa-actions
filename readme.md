@@ -4,7 +4,7 @@
 
 `aqua actions`可以帮助简化`redux`的样板代码,同时`auqa actions`由`ts`编写,具备完整的类型推倒,充分提高开发效率.
 
-整个库包含由两个 API 构成`createAction`和`createReducer`,具体详情见下文.
+整个库包含由两个 API `createAction`,`createReducer`和一个`reducer`生成类`ReducerCreator`构成,具体详情见下文.
 
 ## 快速开始
 
@@ -95,29 +95,29 @@ yarn add aqua-actions
     new ReducerCreator<T>(initState);
   ```
 
-- `ReducerCreator`
-  通过链式调用`.handleAction`添加处理分支,末尾调用`.build()`返回完整`reducer`.
+  - `ReducerCreator`
+    通过链式调用`.handleAction`添加处理分支,末尾调用`.build()`返回完整`reducer`.
 
-  - `handleAction`
+    - `handleAction`
 
-    ```typescript
-        handleAction<P = any, M = any>(
-        type: (() => ActionType) | string,
-        handler: ReducerHandeler<T, P, M>
-    ) :this
-    ```
+      ```typescript
+          handleAction<P = any, M = any>(
+          type: (() => ActionType) | string,
+          handler: ReducerHandeler<T, P, M>
+      ) :this
+      ```
 
-  - `build`
+    - `build`
 
-    ```typescript
-        build(): (state = this.initState, action: ActionType)=> T
-    ```
+      ```typescript
+          build(): (state = this.initState, action: ActionType)=> T
+      ```
 
-  - `ReducerHandeler`
+    - `ReducerHandeler`
 
-    ```typescript
-        type ReducerHandeler<T = any, P = any, M = any> = (
-    state: T,
-    action: ActionType<P, M>
-    ) => T;
-    ```
+      ```typescript
+      type ReducerHandeler<T = any, P = any, M = any> = (
+        state: T,
+        action: ActionType<P, M>
+      ) => T;
+      ```
