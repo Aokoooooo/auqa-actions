@@ -74,9 +74,14 @@ yarn add aqua-actions
 - `createAction`
 
   ```typescript
-  const createAction = <P = any, M = any>(
-    type: string
-  ): ActionCreator<P, M> => (payload?: P, meta?: M) => {
+  createAction = <P = any, M = any>(
+    type: string,
+    defaultPayload: P,
+    defaultMeta: M
+  ): ActionCreator<P, M> => (
+    payload: P = defaultPayload,
+    meta: M = defaultMeta
+  ) => {
     return { type, payload, meta };
   };
 
