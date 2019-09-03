@@ -1,6 +1,6 @@
 {
   "name": "aqua-actions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "redux action utilities",
   "author": "Aoko",
   "license": "MIT",
