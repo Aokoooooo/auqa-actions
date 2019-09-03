@@ -1,4 +1,4 @@
-import { createAction } from "../src";
+import { createAction, createStandardAction } from "../src";
 
 describe("test createAction", () => {
   test("with type", () => {
@@ -32,5 +32,9 @@ describe("test createAction", () => {
       payload: 1,
       meta: 2
     });
+  });
+  test("create standard action", () => {
+    const standardAction = createStandardAction<number>("TEST/STAND");
+    expect(standardAction(20)).toEqual({ type: "TEST/STAND", payload: 20 });
   });
 });
