@@ -63,7 +63,7 @@ yarn add aqua-actions
   ```typescript
   const initState = { sum: 0 };
   const reducer = createReducer(initState)
-    .handleAction(add, (state, action<ReturnType<typeof add>) => {
+    .handleAction(add, (state, action) => {
       return { ...state, sum: state.sum + action.payload };
     })
     .build();
@@ -74,12 +74,16 @@ yarn add aqua-actions
 - `createAction`
 
   ```typescript
-  const createAction = <P = any, M = any>(type: string) => (
-    payload?: P,
-    meta?: M
-  ): ActionType<P> => {
+  const createAction = <P = any, M = any>(
+    type: string
+  ): ActionCreator<P, M> => (payload?: P, meta?: M) => {
     return { type, payload, meta };
   };
+
+  export type ActionCreator<P = any, M = any> = (
+    payload?: P,
+    meta?: M
+  ) => ActionType<P, M>;
 
   type ActionType<P = any, M = any> = {
     type: string;
@@ -101,9 +105,9 @@ yarn add aqua-actions
     - `handleAction`
 
       ```typescript
-          handleAction<P = any, M = any>(
-          type: (() => ActionType) | string,
-          handler: ReducerHandeler<T, P, M>
+          handleAction<A extends ActionType = ActionType>(
+          type: (() => A) | string,
+          handler: ReducerHandeler<T, A>
       ) :this
       ```
 
@@ -116,8 +120,8 @@ yarn add aqua-actions
     - `ReducerHandeler`
 
       ```typescript
-      type ReducerHandeler<T = any, P = any, M = any> = (
+      type ReducerHandeler<T = any, A extends ActionType = ActionType> = (
         state: T,
-        action: ActionType<P, M>
+        action: A
       ) => T;
       ```
