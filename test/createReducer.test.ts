@@ -56,12 +56,8 @@ describe("test createReducer", () => {
     });
   });
   test("reducer1 not changed", () => {
-    expect(reducer1(undefined, changePage(10))).toEqual({
-      ...initReducer1
-    });
-    expect(reducer1(undefined, changeIsGod())).toEqual({
-      ...initReducer1
-    });
+    expect(reducer1(undefined, changePage(10))).toEqual(initReducer1);
+    expect(reducer1(initReducer1, changeIsGod())).toEqual(initReducer1);
   });
 
   test("change page to 200", () => {
@@ -77,11 +73,7 @@ describe("test createReducer", () => {
     });
   });
   test("reducer2 not changed", () => {
-    expect(reducer2(undefined, changeSize(10))).toEqual({
-      ...initReducer2
-    });
-    expect(reducer2(undefined, changeWidth(-20))).toEqual({
-      ...initReducer2
-    });
+    expect(reducer2(undefined, changeSize(10))).toEqual(initReducer2);
+    expect(reducer2(initReducer2, changeWidth(-20))).toEqual(initReducer2);
   });
 });

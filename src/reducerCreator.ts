@@ -2,16 +2,17 @@ import { ActionType } from "./createAction";
 
 export class ReducerCreator<T = any> {
   private initState: T;
-  private typeList: Map<string, ReducerHandeler<T>>;
+  // tslint:disable-next-line: ban-types
+  private typeList: Map<string, Function>;
 
   constructor(initState: T) {
     this.initState = initState;
-    this.typeList = new Map<string, ReducerHandeler<T>>();
+    this.typeList = new Map();
   }
 
-  public handleAction<P = any, M = any>(
-    type: (() => ActionType) | string,
-    handler: ReducerHandeler<T, P, M>
+  public handleAction<A extends ActionType = ActionType>(
+    type: (() => A) | string,
+    handler: ReducerHandeler<T, A>
   ) {
     if (typeof type === "function") {
       type = type().type;
@@ -34,7 +35,7 @@ export class ReducerCreator<T = any> {
   }
 }
 
-export type ReducerHandeler<T = any, P = any, M = any> = (
+export type ReducerHandeler<T = any, A extends ActionType = ActionType> = (
   state: T,
-  action: ActionType<P, M>
+  action: A
 ) => T;
