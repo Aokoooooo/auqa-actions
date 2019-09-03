@@ -71,25 +71,45 @@ yarn add aqua-actions
 
 ## API
 
-- `createAction`
+- `createAction`和`createStandardAction`
+  两者的区别在于,`createStandardAction`中`payload`是必填项.
 
   ```typescript
   const createAction = <P = any, M = any>(
     type: string
-  ): ActionCreator<P, M> => (payload?: P, meta?: M) => {
+  ): BasicActionCreator<P, M> => (payload?: P, meta?: M) => {
     return { type, payload, meta };
   };
 
-  export type ActionCreator<P = any, M = any> = (
+  type BasicActionCreator<P = any, M = any> = (
     payload?: P,
     meta?: M
-  ) => ActionType<P, M>;
+  ) => BasicActionType<P, M>;
 
-  type ActionType<P = any, M = any> = {
+  type BasicActionType<P = any, M = any> = {
     type: string;
     payload?: P;
     meta?: M;
   };
+
+  const createStandardAction = <P = any, M = any>(
+    type: string
+  ): StandardActionCreator<P, M> => (payload: P, meta?: M) => {
+    return { type, payload, meta };
+  };
+
+  type StandardActionCreator<P = any, M = any> = (
+    payload: P,
+    meta?: M
+  ) => StandardActionType<P, M>;
+
+  type StandardActionType<P = any, M = any> = {
+    type: string;
+    payload: P;
+    meta?: M;
+  };
+
+  type ActionType = BasicActionType | StandardActionType;
   ```
 
 - `createReducer`
