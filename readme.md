@@ -76,11 +76,11 @@ yarn add aqua-actions
   ```typescript
   createAction = <P = any, M = any>(
     type: string,
-    defaultPayload: P,
-    defaultMeta: M
+    defaultPayload?: P,
+    defaultMeta?: M
   ): ActionCreator<P, M> => (
-    payload: P = defaultPayload,
-    meta: M = defaultMeta
+    payload: P | undefined = defaultPayload,
+    meta: M | undefined = defaultMeta
   ) => {
     return { type, payload, meta };
   };
