@@ -1,11 +1,6 @@
 export const createAction = <P = any, M = any>(
-  type: string,
-  defaultPayload?: P,
-  defaultMeta?: M
-): ActionCreator<P, M> => (
-  payload: P | undefined = defaultPayload,
-  meta: M | undefined = defaultMeta
-) => {
+  type: string
+): ActionCreator<P, M> => (payload?: P, meta?: M) => {
   return { type, payload, meta };
 };
 
