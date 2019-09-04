@@ -1,4 +1,5 @@
 # auqa actions
+![NPM](https://img.shields.io/npm/l/aqua-actions)
 
 ## 简介
 
