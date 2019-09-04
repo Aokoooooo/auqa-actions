@@ -11,7 +11,7 @@ export class ReducerCreator<T = any> {
   }
 
   public handleAction<A extends ActionType = ActionType>(
-    type: (() => A) | string,
+    type: ((payload?:any, meta?:any) => A) | string,
     handler: ReducerHandeler<T, A>
   ) {
     if (typeof type === "function") {

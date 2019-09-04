@@ -10,22 +10,15 @@ export const createStandardAction = <P = any, M = any>(
   return { type, payload, meta };
 };
 
-// tslint:disable-next-line: interface-over-type-literal
-export type BasicActionType<P = any, M = any> = {
-  type: string;
-  payload?: P;
-  meta?: M;
-};
-
 export type BasicActionCreator<P = any, M = any> = (
   payload?: P,
   meta?: M
 ) => BasicActionType<P, M>;
 
 // tslint:disable-next-line: interface-over-type-literal
-export type StandardActionType<P = any, M = any> = {
+export type BasicActionType<P = any, M = any> = {
   type: string;
-  payload: P;
+  payload?: P;
   meta?: M;
 };
 
@@ -34,4 +27,12 @@ export type StandardActionCreator<P = any, M = any> = (
   meta?: M
 ) => StandardActionType<P, M>;
 
+// tslint:disable-next-line: interface-over-type-literal
+export type StandardActionType<P = any, M = any> = {
+  type: string;
+  payload: P;
+  meta?: M;
+};
+
 export type ActionType = BasicActionType | StandardActionType;
+export type ActionCreator = BasicActionCreator | StandardActionCreator;

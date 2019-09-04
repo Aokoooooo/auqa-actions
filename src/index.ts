@@ -3,6 +3,7 @@ export {
   createStandardAction,
   BasicActionType,
   ActionType,
+  ActionCreator,
   BasicActionCreator,
   StandardActionCreator
 } from "./createAction";

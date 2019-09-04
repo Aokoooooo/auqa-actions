@@ -126,7 +126,7 @@ yarn add aqua-actions
 
       ```typescript
           handleAction<A extends ActionType = ActionType>(
-          type: (() => A) | string,
+          type: ((payload?:any, meta?:any) => A) | string,
           handler: ReducerHandeler<T, A>
       ) :this
       ```
