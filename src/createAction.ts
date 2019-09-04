@@ -1,15 +1,3 @@
-export const createAction = <P = any, M = any>(
-  type: string
-): BasicActionCreator<P, M> => (payload?: P, meta?: M) => {
-  return { type, payload, meta };
-};
-
-export const createStandardAction = <P = any, M = any>(
-  type: string
-): StandardActionCreator<P, M> => (payload: P, meta?: M) => {
-  return { type, payload, meta };
-};
-
 export type BasicActionCreator<P = any, M = any> = (
   payload?: P,
   meta?: M
@@ -22,6 +10,18 @@ export type BasicActionType<P = any, M = any> = {
   meta?: M;
 };
 
+/**
+ * Create the an action creator for the certain type.
+ * No param is required by the creator.
+ *
+ * @param type a unique string
+ */
+export const createAction = <P = any, M = any>(
+  type: string
+): BasicActionCreator<P, M> => (payload?: P, meta?: M) => {
+  return { type, payload, meta };
+};
+
 export type StandardActionCreator<P = any, M = any> = (
   payload: P,
   meta?: M
@@ -32,6 +32,16 @@ export type StandardActionType<P = any, M = any> = {
   type: string;
   payload: P;
   meta?: M;
+};
+/**
+ * Create the an action creator for the certain type.
+ * But "payload" filed is required.
+ * @param type a unique string
+ */
+export const createStandardAction = <P = any, M = any>(
+  type: string
+): StandardActionCreator<P, M> => (payload: P, meta?: M) => {
+  return { type, payload, meta };
 };
 
 export type ActionType<P = any, M = any> =
