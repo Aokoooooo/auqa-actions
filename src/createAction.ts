@@ -34,5 +34,10 @@ export type StandardActionType<P = any, M = any> = {
   meta?: M;
 };
 
-export type ActionType = BasicActionType | StandardActionType;
-export type ActionCreator = BasicActionCreator | StandardActionCreator;
+export type ActionType<P = any, M = any> =
+  | BasicActionType<P, M>
+  | StandardActionType<P, M>;
+
+export type ActionCreator<P = any, M = any> =
+  | BasicActionCreator<P, M>
+  | StandardActionCreator<P, M>;

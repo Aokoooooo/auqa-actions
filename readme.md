@@ -109,7 +109,13 @@ yarn add aqua-actions
     meta?: M;
   };
 
-  type ActionType = BasicActionType | StandardActionType;
+  type ActionType<P = any, M = any> =
+    | BasicActionType<P, M>
+    | StandardActionType<P, M>;
+
+  type ActionCreator<P = any, M = any> =
+    | BasicActionCreator<P, M>
+    | StandardActionCreator<P, M>;
   ```
 
 - `createReducer`
