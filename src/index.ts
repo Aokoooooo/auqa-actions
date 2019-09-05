@@ -19,11 +19,9 @@ export {
   isTypeOf
 } from "./utils";
 export {
-  RootReducerType,
-  AsyncReducers,
-  PartialAsyncReducers,
-  AsyncReducersKeyType,
-  AsyncReducersValueType,
-  AsyncReducerType,
-  StoreStateType
+  IReducers,
+  ReducerState,
+  ReducerStateKeyType,
+  ReducerStateValueType,
+  StoreState
 } from "./reduxStoreType";
