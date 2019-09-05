@@ -18,3 +18,12 @@ export {
   getTypeOf,
   isTypeOf
 } from "./utils";
+export {
+  RootReducerType,
+  AsyncReducers,
+  PartialAsyncReducers,
+  AsyncReducersKeyType,
+  AsyncReducersValueType,
+  AsyncReducerType,
+  StoreStateType
+} from "./reduxStoreType";
