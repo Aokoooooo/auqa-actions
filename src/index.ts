@@ -12,4 +12,9 @@ export {
 } from "./createAction";
 export { createReducer } from "./createReducer";
 export { ReducerCreator, ReducerHandeler } from "./reducerCreator";
-export { getActionCreatorWithPrefix, getTypeOf, isTypeOf } from "./utils";
+export {
+  bindActionCreators,
+  getActionCreatorWithPrefix,
+  getTypeOf,
+  isTypeOf
+} from "./utils";

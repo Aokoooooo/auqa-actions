@@ -2,7 +2,9 @@ import {
   ActionType,
   createAction,
   createStandardAction,
-  ActionCreator
+  ActionCreator,
+  ActionPayloadType,
+  ActionMetaType
 } from "./createAction";
 
 /**
@@ -68,10 +70,7 @@ export const bindActionCreators = <T extends IUseActionsActionCreators>(
     // tslint:disable-next-line: ban-types
     dispatch: Function
   ) => {
-    return (
-      payload?: ReturnType<P>["payload"],
-      meta?: ReturnType<P>["meta"]
-    ) => {
+    return (payload?: ActionPayloadType<P>, meta?: ActionMetaType<P>) => {
       return dispatch(actionCreator(payload, meta));
     };
   };

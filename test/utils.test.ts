@@ -1,4 +1,5 @@
 import {
+  bindActionCreators,
   createAction,
   createStandardAction,
   getActionCreatorWithPrefix,
@@ -63,5 +64,12 @@ describe("test utils", () => {
     expect(
       standardActionCreator.createStandardAction("actionTypeB")("")
     ).toEqual(standardActionCreatorB(""));
+  });
+
+  test("bindActionCreators work well", () => {
+    const mockFn = jest.fn((a: any) => a);
+    const actions = bindActionCreators({ actionCreatorA }, mockFn);
+    actions.actionCreatorA();
+    expect(mockFn).toHaveBeenCalledWith(actionCreatorA());
   });
 });
