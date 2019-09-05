@@ -1,10 +1,10 @@
 import {
+  ActionCreator,
+  ActionMetaType,
+  ActionPayloadType,
   ActionType,
   createAction,
-  createStandardAction,
-  ActionCreator,
-  ActionPayloadType,
-  ActionMetaType
+  createStandardAction
 } from "./createAction";
 
 /**
