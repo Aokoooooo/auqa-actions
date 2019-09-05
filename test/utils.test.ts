@@ -1,9 +1,9 @@
 import {
+  createAction,
+  createStandardAction,
   getActionCreatorWithPrefix,
   getTypeOf,
-  isTypeOf,
-  createAction,
-  createStandardAction
+  isTypeOf
 } from "../src";
 
 describe("test utils", () => {
