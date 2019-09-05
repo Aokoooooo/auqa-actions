@@ -41,10 +41,10 @@ export const getActionCreatorWithPrefix = (
   separator: string = "/"
 ) => {
   return {
-    createAction: (type: string) =>
-      createAction(`${prefix}${separator}${type}`),
-    createStandardAction: (type: string) =>
-      createStandardAction(`${prefix}${separator}${type}`)
+    createAction: <P = any, M = any>(type: string) =>
+      createAction<P, M>(`${prefix}${separator}${type}`),
+    createStandardAction: <P = any, M = any>(type: string) =>
+      createStandardAction<P, M>(`${prefix}${separator}${type}`)
   };
 };
 
