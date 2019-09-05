@@ -1,7 +1,7 @@
 import { ActionType } from "./createAction";
 
 /**
- * Reducer builder, chain call the "handleAction()" and "build()" to generate a reducer.
+ * Reducer builder, chain call the `handleAction()` and `build()` to generate a reducer.
  */
 export class ReducerCreator<T = any> {
   private initState: T;
