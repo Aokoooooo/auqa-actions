@@ -38,7 +38,7 @@ export class ReducerCreator<T = any> {
   /**
    * Call to return the reducer
    */
-  public build() {
+  public build(): ReducerType<T> {
     return (state = this.initState, action: ActionType): T => {
       if (this.typeMap.has(action.type)) {
         const handler = this.typeMap.get(action.type);
@@ -52,4 +52,9 @@ export class ReducerCreator<T = any> {
 export type ReducerHandeler<T = any, A extends ActionType = ActionType> = (
   state: T,
   action: A
+) => T;
+
+export type ReducerType<T = any> = (
+  state: T | undefined,
+  action: ActionType
 ) => T;
