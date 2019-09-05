@@ -1,4 +1,9 @@
-import { ActionType, createAction, createStandardAction } from "./createAction";
+import {
+  ActionType,
+  createAction,
+  createStandardAction,
+  ActionCreator
+} from "./createAction";
 
 /**
  * Check if the type of `ActionType` or the `string` is equal to
@@ -39,4 +44,45 @@ export const getActionCreatorWithPrefix = (
     createStandardAction: (type: string) =>
       createStandardAction(`${prefix}${separator}${type}`)
   };
+};
+
+interface IUseActionsActionCreators {
+  [name: string]: ActionCreator;
+}
+
+/**
+ * Is similar to the `Redux` API `bindActionCreators()`,but with some differences.
+ * The first is this api could give you the whole generic support.
+ * And you are only allowed to pass an object to call it,which `Redux` allow you to pass like an array,a function ,or whatever.
+ * Be sure to pass an available `dispatcher` which is provided by `redux store`.
+ * @param actionCreators an object contains some `ActionCreator`s
+ * @param dispatch `Redux` API
+ */
+export const bindActionCreators = <T extends IUseActionsActionCreators>(
+  actionCreators: T,
+  // tslint:disable-next-line: ban-types
+  dispatch: Function
+) => {
+  const bindActionCreator = <P extends T[keyof T]>(
+    actionCreator: P,
+    // tslint:disable-next-line: ban-types
+    dispatch: Function
+  ) => {
+    return (
+      payload?: ReturnType<P>["payload"],
+      meta?: ReturnType<P>["meta"]
+    ) => {
+      return dispatch(actionCreator(payload, meta));
+    };
+  };
+
+  type AoundActionCreators = {
+    [K in keyof T]: T[K];
+  };
+  const boundActionCreators: any = {};
+  Object.keys(actionCreators).map((i: keyof T) => {
+    boundActionCreators[i] = bindActionCreator(actionCreators[i], dispatch);
+  });
+
+  return boundActionCreators as AoundActionCreators;
 };
