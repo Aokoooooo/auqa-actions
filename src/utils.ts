@@ -20,7 +20,7 @@ export const isTypeOf = (
  * Get the type of an action
  * @param action
  */
-export const getType = (action: ActionType) => {
+export const getTypeOf = (action: ActionType) => {
   return action.type;
 };
 

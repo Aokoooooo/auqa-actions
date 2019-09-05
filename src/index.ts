@@ -2,10 +2,14 @@ export {
   createAction,
   createStandardAction,
   BasicActionType,
+  StandardActionType,
   ActionType,
   ActionCreator,
   BasicActionCreator,
-  StandardActionCreator
+  StandardActionCreator,
+  ActionMetaType,
+  ActionPayloadType
 } from "./createAction";
 export { createReducer } from "./createReducer";
 export { ReducerCreator, ReducerHandeler } from "./reducerCreator";
+export { getActionCreatorWithPrefix, getTypeOf, isTypeOf } from "./utils";
