@@ -48,7 +48,7 @@ export const getActionCreatorWithPrefix = (
   };
 };
 
-interface IUseActionsActionCreators {
+export interface IActionCreators {
   [name: string]: ActionCreator;
 }
 
@@ -60,7 +60,7 @@ interface IUseActionsActionCreators {
  * @param actionCreators an object contains some `ActionCreator`s
  * @param dispatch `Redux` API
  */
-export const bindActionCreators = <T extends IUseActionsActionCreators>(
+export const bindActionCreators = <T extends IActionCreators>(
   actionCreators: T,
   // tslint:disable-next-line: ban-types
   dispatch: Function

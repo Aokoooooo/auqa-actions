@@ -13,6 +13,7 @@ export {
 export { createReducer } from "./createReducer";
 export { ReducerCreator, ReducerHandeler } from "./reducerCreator";
 export {
+  IActionCreators,
   bindActionCreators,
   getActionCreatorWithPrefix,
   getTypeOf,
