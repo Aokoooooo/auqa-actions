@@ -1,3 +1,5 @@
+import { ReducerState } from "./reduxStoreType";
+
 export type BasicActionCreator<P = any, M = any> = (
   payload?: P,
   meta?: M
@@ -67,3 +69,21 @@ export type ActionType<P = any, M = any> =
 export type ActionCreator<P = any, M = any> =
   | BasicActionCreator<P, M>
   | StandardActionCreator<P, M>;
+
+export const createThunkAction = <
+  StoreState extends ReducerState = {},
+  ExtraArg = undefined,
+  // tslint:disable-next-line: ban-types
+  DispatchType extends Function = Function
+>(
+  dispatch: DispatchType,
+  callback: (
+    dispatch: <Action extends ActionType | string = ActionType | string>(
+      action: Action
+    ) => Action,
+    getState: () => StoreState,
+    extraArg?: ExtraArg
+  ) => any
+) => {
+  return dispatch(callback);
+};

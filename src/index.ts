@@ -8,7 +8,8 @@ export {
   BasicActionCreator,
   StandardActionCreator,
   ActionMetaType,
-  ActionPayloadType
+  ActionPayloadType,
+  createThunkAction
 } from "./createAction";
 export { createReducer } from "./createReducer";
 export { ReducerCreator, ReducerHandeler } from "./reducerCreator";
