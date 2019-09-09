@@ -79,9 +79,9 @@ export type ActionCreator<P = any, M = any> =
   | StandardActionCreator<P, M>;
 
 /**
- *
+ * redux-thunk action creator, to dispatch the actions asynchronously.
  * @param dispatch redux store api
- * @param callback
+ * @param callback the specific service that how to dispatch the actions asynchronously.
  *
  * @example
  * const dispatch = store.dispatch;
@@ -95,8 +95,8 @@ export type ActionCreator<P = any, M = any> =
  */
 export const createThunkAction = <
   StoreState extends ReducerState = {},
-  ReturnType = void,
   ExtraArg = undefined,
+  ReturnType = void,
   // tslint:disable-next-line: ban-types
   DispatchType extends Function = Function
 >(
