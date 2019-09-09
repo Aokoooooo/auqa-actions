@@ -13,13 +13,7 @@ export {
 } from "./createAction";
 export { createReducer } from "./createReducer";
 export { ReducerCreator, ReducerHandeler } from "./reducerCreator";
-export {
-  IActionCreators,
-  bindActionCreators,
-  getActionCreatorWithPrefix,
-  getTypeOf,
-  isTypeOf
-} from "./utils";
+export { getActionCreatorWithPrefix, getTypeOf, isTypeOf } from "./utils";
 export {
   IReducers,
   ReducerState,

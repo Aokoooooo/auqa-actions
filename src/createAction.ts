@@ -17,6 +17,10 @@ export type BasicActionType<P = any, M = any> = {
  * No param is required by the creator.
  *
  * @param type a unique string
+ *
+ * @example
+ * const changeHide = createAction("changeHide")
+ * const changeHideAction = changeHide() // { type : "changeHide" }
  */
 export const createAction = <P = any, M = any>(
   type: string
@@ -39,6 +43,10 @@ export type StandardActionType<P = any, M = any> = {
  * Create the an action creator for the certain type.
  * But `payload` filed is required.
  * @param type a unique string
+ *
+ * @example
+ * const changeSize = createStandardAction("changeSize");
+ * const changeSizeAction = changeSize(12); // { type : "changeSize", payload: 12}
  */
 export const createStandardAction = <P = any, M = any>(
   type: string
@@ -70,8 +78,24 @@ export type ActionCreator<P = any, M = any> =
   | BasicActionCreator<P, M>
   | StandardActionCreator<P, M>;
 
+/**
+ *
+ * @param dispatch redux store api
+ * @param callback
+ *
+ * @example
+ * const dispatch = store.dispatch;
+ * const add = createStandardAction<number>("add");
+ * const asyncAdd = (id:number)=> createThunkAction(dispatch, async (dispatch)=>{
+ *  const size= await getSizeById(id);
+ *  dispatch(add(size));
+ * })
+ *
+ * asyncAdd(1);
+ */
 export const createThunkAction = <
   StoreState extends ReducerState = {},
+  ReturnType = void,
   ExtraArg = undefined,
   // tslint:disable-next-line: ban-types
   DispatchType extends Function = Function
@@ -83,7 +107,7 @@ export const createThunkAction = <
     ) => Action,
     getState: () => StoreState,
     extraArg?: ExtraArg
-  ) => any
+  ) => ReturnType
 ) => {
-  return dispatch(callback);
+  return dispatch(callback) as ReturnType;
 };

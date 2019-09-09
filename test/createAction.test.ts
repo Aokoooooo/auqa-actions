@@ -1,4 +1,4 @@
-import { createAction, createStandardAction } from "../src";
+import { createAction, createStandardAction, createThunkAction } from "../src";
 
 describe("test createAction", () => {
   test("with type", () => {
@@ -36,5 +36,14 @@ describe("test createAction", () => {
   test("create standard action", () => {
     const standardAction = createStandardAction<number>("TEST/STAND");
     expect(standardAction(20)).toEqual({ type: "TEST/STAND", payload: 20 });
+  });
+  test("createThunkAction work well", () => {
+    const mockFn = jest.fn((a: any) => a);
+    const testCallback = () => {
+      console.log("callback");
+    };
+    const action = () => createThunkAction(mockFn, testCallback);
+    action();
+    expect(mockFn).toHaveBeenCalledWith(testCallback);
   });
 });
