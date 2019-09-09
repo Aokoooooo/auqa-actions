@@ -45,7 +45,7 @@ export type StandardActionType<P = any, M = any> = {
  * @param type a unique string
  *
  * @example
- * const changeSize = createStandardAction("changeSize");
+ * const changeSize = createStandardAction<number>("changeSize");
  * const changeSizeAction = changeSize(12); // { type : "changeSize", payload: 12}
  */
 export const createStandardAction = <P = any, M = any>(

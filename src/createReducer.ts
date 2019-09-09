@@ -5,7 +5,7 @@ import { ReducerCreator } from "./reducerCreator";
  * @param initState
  * @example
  * const initState = { size: 0, hide: false };
- * const changeSize = createStandardAction("changeSize");
+ * const changeSize = createStandardAction<number>("changeSize");
  * const changeHide = createAction("changeHide");
  * const reducer = createReducer(initState)
  *  .handleAction(changeSize, (state, action)=>{
