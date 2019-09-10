@@ -19,8 +19,9 @@ export type BasicActionType<P = any, M = any> = {
  * @param type a unique string
  *
  * @example
- * const changeHide = createAction("changeHide")
- * const changeHideAction = changeHide() // { type : "changeHide" }
+ * const changeHide = createAction("changeHide");
+ * // { type : "changeHide" }
+ * const changeHideAction = changeHide();
  */
 export const createAction = <P = any, M = any>(
   type: string
@@ -46,7 +47,8 @@ export type StandardActionType<P = any, M = any> = {
  *
  * @example
  * const changeSize = createStandardAction<number>("changeSize");
- * const changeSizeAction = changeSize(12); // { type : "changeSize", payload: 12}
+ * // { type : "changeSize", payload: 12}
+ * const changeSizeAction = changeSize(12);
  */
 export const createStandardAction = <P = any, M = any>(
   type: string
@@ -86,9 +88,11 @@ export type ActionCreator<P = any, M = any> =
  * @example
  * const dispatch = store.dispatch;
  * const add = createStandardAction<number>("add");
- * const asyncAdd = (id:number)=> createThunkAction(dispatch, async (dispatch)=>{
- *  const size= await getSizeById(id);
- *  dispatch(add(size));
+ * const asyncAdd = (id:number) => createThunkAction(
+ *  dispatch,
+ *  async (dispatch) => {
+ *    const size = await getSizeById(id);
+ *    dispatch(add(size));
  * })
  *
  * asyncAdd(1);
