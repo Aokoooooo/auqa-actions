@@ -1,3 +1,4 @@
+import { AquaAction } from "./createMiddleware";
 import { ReducerState } from "./reduxStoreType";
 
 export type BasicActionCreator<P = any, M = any> = (
@@ -81,37 +82,26 @@ export type ActionCreator<P = any, M = any> =
   | StandardActionCreator<P, M>;
 
 /**
- * redux-thunk action creator, to dispatch the actions asynchronously.
- * @param dispatch redux store api
- * @param callback the specific service that how to dispatch the actions asynchronously.
+ * create an async action, you should add aqua middleware to redux store before you use it.
+ * It's just seem like redux thunk, if the action is an object `ActionType`, dispatch it;
+ * or if the action is a function, invoke it.
+ * @param aquaAction
  *
  * @example
- * const dispatch = store.dispatch;
- * const add = createStandardAction<number>("add");
- * const asyncAdd = (id:number) => createThunkAction(
- *  dispatch,
- *  async (dispatch) => {
+ * const changeSize = createStandardAction<number>('changeSize');
+ * const addSizeAsync = (id: number) => createAsyncAction<StoreState>(
+ *  async dispatch => {
  *    const size = await getSizeById(id);
- *    dispatch(add(size));
- * })
- *
- * asyncAdd(1);
+ *    changeSize(size);
+ *  }
+ * )
  */
-export const createThunkAction = <
+export const createAsyncAction = <
   StoreState extends ReducerState = {},
   ExtraArg = undefined,
-  ReturnType = void,
-  // tslint:disable-next-line: ban-types
-  DispatchType extends Function = Function
+  ReturnType = any
 >(
-  dispatch: DispatchType,
-  callback: (
-    dispatch: <Action extends ActionType | string = ActionType | string>(
-      action: Action
-    ) => Action,
-    getState: () => StoreState,
-    extraArg?: ExtraArg
-  ) => ReturnType
+  aquaAction: AquaAction<StoreState, ReturnType, ExtraArg, ActionType>
 ) => {
-  return dispatch(callback) as ReturnType;
+  return aquaAction;
 };

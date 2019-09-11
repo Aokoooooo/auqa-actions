@@ -7,7 +7,8 @@
     "no-implicit-dependencies": false,
     "no-console": false,
     "no-shadowed-variable": false,
-    "prefer-conditional-expression": false
+    "prefer-conditional-expression": false,
+    "interface-name": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/*.json"]

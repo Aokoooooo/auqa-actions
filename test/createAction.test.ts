@@ -1,4 +1,4 @@
-import { createAction, createStandardAction, createThunkAction } from "../src";
+import { createAction, createAsyncAction, createStandardAction } from "../src";
 
 describe("test createAction", () => {
   test("with type", () => {
@@ -39,11 +39,17 @@ describe("test createAction", () => {
   });
   test("createThunkAction work well", () => {
     const mockFn = jest.fn((a: any) => a);
-    const testCallback = () => {
-      console.log("callback");
+    const testCallback = (dispatch: (a: any) => any) => {
+      dispatch("testCallback");
     };
-    const action = () => createThunkAction(mockFn, testCallback);
-    action();
-    expect(mockFn).toHaveBeenCalledWith(testCallback);
+    const action = () => createAsyncAction(testCallback);
+    action()(
+      mockFn,
+      () => {
+        return {};
+      },
+      undefined
+    );
+    expect(mockFn).toHaveBeenCalledWith("testCallback");
   });
 });
