@@ -19,16 +19,12 @@
     "jest": "^24.8.0",
     "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
-    "redux": "^4.0.4",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.5.3",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
-  },
-  "peerDependencies": {
-    "redux": "^4"
   },
   "husky": {
     "hooks": {

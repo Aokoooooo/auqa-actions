@@ -1,4 +1,3 @@
-import { Middleware } from "redux";
 import { ActionType } from "./createAction";
 import { ReducerState } from "./reduxStoreType";
 
@@ -31,6 +30,11 @@ export interface AquaDispatch<State, ExtraArg, Action extends ActionType> {
     | R;
 }
 
+interface MiddlewareAPI<D, S = any> {
+  dispatch: D;
+  getState(): S;
+}
+
 /**
  * The type of aqua middleware.
  */
@@ -38,11 +42,9 @@ export type AuqaMiddleware<
   State,
   Action extends ActionType,
   ExtraArg = undefined
-> = Middleware<
-  AquaDispatch<State, ExtraArg, Action>,
-  State,
-  AquaDispatch<State, ExtraArg, Action>
->;
+> = (
+  api: MiddlewareAPI<AquaDispatch<State, ExtraArg, Action>, State>
+) => (next: AquaDispatch<State, ExtraArg, Action>) => (action: any) => any;
 
 /**
  * Call to create the middleware.
