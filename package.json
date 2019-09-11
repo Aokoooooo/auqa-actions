@@ -1,7 +1,7 @@
 {
-  "name": "aqua-actions",
-  "version": "0.2.0",
-  "description": "redux action utilities",
+  "name": "redux-aqua",
+  "version": "0.1.0",
+  "description": "an easy way to deal with the redux boilerplate code",
   "author": "Aoko",
   "license": "MIT",
   "main": "dist/index.js",
@@ -26,6 +26,9 @@
     "typescript": "^3.5.3",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
+  },
+  "peerDependencies": {
+    "redux": "^4"
   },
   "husky": {
     "hooks": {
