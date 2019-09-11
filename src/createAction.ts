@@ -6,12 +6,11 @@ export type BasicActionCreator<P = any, M = any> = (
   meta?: M
 ) => BasicActionType<P, M>;
 
-// tslint:disable-next-line: interface-over-type-literal
-export type BasicActionType<P = any, M = any> = {
+export interface BasicActionType<P = any, M = any> {
   type: string;
   payload?: P;
   meta?: M;
-};
+}
 
 /**
  * Create the an action creator for the certain type.
@@ -35,12 +34,11 @@ export type StandardActionCreator<P = any, M = any> = (
   meta?: M
 ) => StandardActionType<P, M>;
 
-// tslint:disable-next-line: interface-over-type-literal
-export type StandardActionType<P = any, M = any> = {
+export interface StandardActionType<P = any, M = any> {
   type: string;
   payload: P;
   meta?: M;
-};
+}
 /**
  * Create the an action creator for the certain type.
  * But `payload` filed is required.

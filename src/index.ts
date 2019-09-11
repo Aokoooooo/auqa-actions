@@ -21,7 +21,7 @@ export {
 export { ReducerCreator, ReducerHandeler } from "./reducerCreator";
 export { getActionCreatorWithPrefix, getTypeOf, isTypeOf } from "./utils";
 export {
-  IReducers,
+  Reducers,
   ReducerState,
   ReducerStateKeyType,
   ReducerStateValueType,

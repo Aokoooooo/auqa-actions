@@ -1,4 +1,5 @@
 import aqua, { createAction, createAsyncAction } from "../src";
+
 describe("test createMiddleware", () => {
   const mockDispatch = jest.fn((a: any) => a);
   const mockGetState = jest.fn(() => {
