@@ -1,11 +1,10 @@
-# auqa actions
-![NPM](https://img.shields.io/npm/l/aqua-actions)
+# redux-aqua
+
+![NPM](https://img.shields.io/npm/l/redux-aqua)
 
 ## 简介
 
-`aqua actions`可以帮助简化`redux`的样板代码,同时`auqa actions`由`ts`编写,具备完整的类型推倒,充分提高开发效率.
-
-整个库包含由两个 API `createAction`,`createReducer`和一个`reducer`生成类`ReducerCreator`构成,具体详情见下文.
+`redux-aqua`可以帮助简化`redux`的样板代码,同时`redux-aqua`由`ts`编写,具备完整的类型推倒,充分提高开发效率.
 
 ## 快速开始
 
@@ -37,7 +36,7 @@ yarn add aqua-actions
   // add(100)  --->  { type: "ADD", payload: 100}
   ```
 
-- `auqa actions`
+- `redux-aqua`
 
   ```typescript
   const add = createAction<T>("ADD");
@@ -45,6 +44,29 @@ yarn add aqua-actions
   // add()     --->  { type: "ADD"}
   // add(100)  --->  { type: "ADD", payload: 100}
   ```
+
+### 创建异步`action`
+
+创建异步`action`首先需要添加一个`middleware`.
+
+```typescript
+import { applyMiddleware, createStore } from "redux";
+import aqua from "redux-aqua";
+
+const enhancer = applyMiddleware(aqua);
+// reducer 需要自己定义
+const store = createStore(reducer, enhancer);
+```
+
+异步`action`的使用和`redux-thunk`类似.如果`action`是函数,则执行这个函数,否则派送`action`对象.
+
+```typescript
+const asyncAction = (id: number) =>
+  createAsyncAction<StoreState>(async dispatch => {
+    const size = await getSizeById(id);
+    dispatch(size);
+  });
+```
 
 ### 创建`reducer`
 
@@ -60,7 +82,7 @@ yarn add aqua-actions
     }
   };
   ```
-- `aqua actions`
+- `redux-aqua`
   ```typescript
   const initState = { sum: 0 };
   const reducer = createReducer(initState)
@@ -152,3 +174,56 @@ yarn add aqua-actions
         action: A
       ) => T;
       ```
+
+  - `createAsyncAction`
+
+    ```typescript
+    export const createAsyncAction = <
+      StoreState extends ReducerState = {},
+      ExtraArg = undefined,
+      ReturnType = any
+    >(
+      aquaAction: AquaAction<StoreState, ReturnType, ExtraArg, ActionType>
+    ) => {
+      return aquaAction;
+    };
+
+    type AquaAction<State, ReturnType, ExtraArg, Action extends ActionType> = (
+      dispatch: AquaDispatch<State, ExtraArg, Action>,
+      getState: () => State,
+      extraArg: ExtraArg
+    ) => ReturnType;
+
+    interface AquaDispatch<State, ExtraArg, Action extends ActionType> {
+      <ReturnType>(
+        aquaAction: AquaAction<State, ReturnType, ExtraArg, Action>
+      ): ReturnType;
+      <A extends Action>(action: A): A;
+      <R, A extends Action>(
+        action: A | AquaAction<State, R, ExtraArg, Action>
+      ): A | R;
+    }
+    ```
+
+  - `createMiddleware`
+
+    ```typescript
+    export function createAuqaMiddleware<
+      ExtraArg,
+      State extends ReducerState = {},
+      Action extends ActionType = ActionType
+    >(extraArg: ExtraArg): AuqaMiddleware<State, Action, ExtraArg> {
+      return ({ getState, dispatch }) => (
+        next: AquaDispatch<State, ExtraArg, Action>
+      ) => <ReturnType = any>(
+        action: AquaAction<State, ReturnType, ExtraArg, Action>
+      ) => {
+        if (typeof action === "function") {
+          return action(dispatch, getState, extraArg);
+        }
+        return next(action);
+      };
+    }
+    ```
+
+    项目中默认导出的`aqua`即为`createMiddleware`的结果.不过这个实例中有一个`withExtraArg`字段,本质也是`createMiddleware`方法,给予一个方便的修改中间件的接口.
